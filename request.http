@@ -1,0 +1,17 @@
+POST http://localhost:3001/auth/register 
+Content-Type: application/json
+
+{
+    "username": "Duy Tung",
+    "password": "1611",
+    "fullname": "Nguyen Duy Tung"
+}
+
+###
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "username": "Duy Tung 02",
+    "password" : "1611"
+}
