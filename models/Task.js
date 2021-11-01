@@ -14,6 +14,10 @@ const TaskSchema = new Schema({
     type: Number,
     required: true,
   },
+  importantRate: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("task", TaskSchema);

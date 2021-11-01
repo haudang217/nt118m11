@@ -15,3 +15,15 @@ Content-Type: application/json
     "username": "Duy Tung 02",
     "password" : "1611"
 }
+
+###
+POST http://localhost:3001/task/add
+Content-Type: application/json
+
+{
+    "taskname": "Task 01",
+    "totalTime" : 100,
+    "deadline" : "Wed, 21 Oct 2015 18:27:50 GMT",
+    "importantRate": 10
+
+}
