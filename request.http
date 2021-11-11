@@ -46,3 +46,19 @@ GET http://localhost:3001/setting/
 
 ###
 GET http://localhost:3001/friendlist/
+
+###
+POST http://localhost:3001/friendlist/add 
+Content-Type: application/json
+
+{
+    "friendId": "12345"
+}
+
+###
+POST http://localhost:3001/friendlist/create
+Content-Type: application/json
+
+{
+
+}

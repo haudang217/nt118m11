@@ -41,6 +41,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//dang ky phai goi luon API de tao list friend va setting
+
 router.post("/register", async (req, res) => {
   const { username, password, fullname } = req.body;
 

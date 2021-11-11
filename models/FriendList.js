@@ -5,6 +5,7 @@ const FriendSchema = new Schema({
   userId: {
     type: String,
     required: true,
+    unique: true,
   },
   friendList: {
     type: Array, //mang userID cua ban be
