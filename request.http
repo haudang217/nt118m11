@@ -52,13 +52,26 @@ POST http://localhost:3001/friendlist/add
 Content-Type: application/json
 
 {
-    "friendId": "12345"
+    "friendId": "12345789"
 }
 
 ###
 POST http://localhost:3001/friendlist/create
 Content-Type: application/json
 
-{
+###
+DELETE http://localhost:3001/task/delete
+Content-Type: application/json
 
+{
+    "taskId": "618c7b0c959b278c13a96a5f"
+}
+
+###
+PUT http://localhost:3001/task/edit
+Content-Type: application/json
+
+{
+    "taskId": "618c7b15959b278c13a96a61",
+    "taskname": "new task name testing"
 }

@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
+//LOGIN API
+//req: username - password
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -42,7 +44,8 @@ router.post("/login", async (req, res) => {
 });
 
 //dang ky phai goi luon API de tao list friend va setting
-
+//REGISTER API
+//req: username - password - fullname
 router.post("/register", async (req, res) => {
   const { username, password, fullname } = req.body;
 
@@ -89,12 +92,6 @@ router.post("/register", async (req, res) => {
       .status(500)
       .json({ success: false, message: "Internal server error: " + err });
   }
-});
-
-router.get("/", (req, res) => {
-  res
-    .status(200)
-    .json({ success: true, message: "Hello, this is the login page" });
 });
 
 module.exports = router;

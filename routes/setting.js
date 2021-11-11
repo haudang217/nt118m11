@@ -4,6 +4,7 @@ const Setting = require("../models/Setting");
 const verifyToken = require("../middlewares/auth.middleware");
 const router = express.Router();
 
+//GET SETTINGS API
 router.get("/", verifyToken, async (req, res) => {
   const { userId } = req;
   if (!userId)
@@ -29,7 +30,8 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-router.post("/", verifyToken, async (req, res) => {
+//SET SETTING API
+router.post("/create", verifyToken, async (req, res) => {
   const { userId } = req;
   if (!userId)
     return res
@@ -50,5 +52,7 @@ router.post("/", verifyToken, async (req, res) => {
       .json({ success: false, message: "Internal server error: " + err });
   }
 });
+
+//EDIT SETTING API
 
 module.exports = router;

@@ -3,7 +3,7 @@ const verifyToken = require("../middlewares/auth.middleware");
 const FriendList = require("../models/FriendList");
 const router = express.Router();
 
-//get friend list
+//GET FRIEND LIST
 router.get("/", verifyToken, async (req, res) => {
   const { userId } = req;
   if (!userId)
@@ -31,7 +31,7 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-//tao friend list
+//CREATE LIST FRIEND
 router.post("/create", verifyToken, async (req, res) => {
   const { userId } = req;
   if (!userId)
@@ -56,7 +56,7 @@ router.post("/create", verifyToken, async (req, res) => {
   }
 });
 
-//add friend list
+//ADD FRIEND
 router.post("/add", verifyToken, async (req, res) => {
   const { userId } = req;
   const { friendId } = req.body;
@@ -67,19 +67,38 @@ router.post("/add", verifyToken, async (req, res) => {
       .json({ success: false, message: "Missing fields !" });
 
   try {
-    const userFriendList = await FriendList.find({ userId });
+    const userFriendList = await FriendList.findOne({ userId });
     if (!userFriendList)
       return res
         .status(400)
         .json({ success: false, message: "Something happened in the BE" });
 
-    console.log(userFriendList);
+    const oldFriendList = [...userFriendList.friendList];
+    console.log(oldFriendList);
+
     await userFriendList.friendList.push(friendId);
     return res.status(200).json({
       success: true,
       message: "Add new friend successfully",
       userFriendList,
     });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error: " + err });
+  }
+});
+
+//UNFRIEND
+router.delete("/delete", verifyToken, async (req, res) => {
+  const { userId } = req;
+  if (!userIf)
+    return res
+      .status(401)
+      .json({ success: false, message: "user id not found" });
+
+  try {
+    const userFriendList = FriendList.findOneAndDelete({ userId });
   } catch (err) {
     return res
       .status(500)

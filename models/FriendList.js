@@ -8,7 +8,8 @@ const FriendSchema = new Schema({
     unique: true,
   },
   friendList: {
-    type: Array, //mang userID cua ban be
+    type: Array,
+    default: ["1234"], //mang userID cua ban be
   },
 });
 
