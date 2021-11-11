@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const argon2 = require("argon2");
 const User = require("../models/User");
+const Setting = require("../models/Setting");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
@@ -72,6 +73,9 @@ router.post("/register", async (req, res) => {
       { userId: newUser._id },
       process.env.ACCESS_TOKEN_SECRET
     );
+
+    //tao luon setting mac dinh
+    const defaultSetting = new Setting({ userId: newUser._id });
 
     return res.status(200).json({
       success: true,

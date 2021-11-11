@@ -12,7 +12,7 @@ POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "username": "Duy Tung 02",
+    "username": "Duy Tung",
     "password" : "1611"
 }
 
@@ -21,9 +21,28 @@ POST http://localhost:3001/task/add
 Content-Type: application/json
 
 {
-    "taskname": "Task 01",
-    "totalTime" : 100,
+    "taskname": "Task 02",
+    "totalTime" : 200,  
     "deadline" : "Wed, 21 Oct 2015 18:27:50 GMT",
-    "importantRate": 10
+    "importantRate": 5
 
 }
+
+###
+
+GET http://localhost:3001/task/
+Content-Type: application/json
+
+###
+POST http://localhost:3001/setting/
+Content-Type: application/json
+
+{
+    "userId" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MThjNzUyYWQ5ZGM2YjI0OWYxNzkwZmIiLCJpYXQiOjE2MzY1OTQ5ODZ9.G3AQPKNoGmIf4WdttEczB61yLY6Uw6KbPrDEkYixXi0"
+}
+
+###
+GET http://localhost:3001/setting/
+
+###
+GET http://localhost:3001/friendlist/
