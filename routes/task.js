@@ -96,11 +96,7 @@ router.put("/edit", verifyToken, async (req, res) => {
       .json({ success: false, message: "User id not found" });
 
   try {
-    const task = Task.findOneAndUpdate({ _id: taskId }, { taskname });
-    if (!task)
-      return res
-        .status(404)
-        .json({ success: false, message: "Task not found!" });
+    await Task.findOneAndUpdate({ _id: taskId }, { taskname });
 
     return res
       .status(200)

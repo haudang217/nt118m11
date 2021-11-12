@@ -67,20 +67,18 @@ router.post("/add", verifyToken, async (req, res) => {
       .json({ success: false, message: "Missing fields !" });
 
   try {
-    const userFriendList = await FriendList.findOne({ userId });
+    const userFriendList = await FriendList.findOneAndUpdate(
+      { userId },
+      { $push: { friendList: friendId } }
+    );
     if (!userFriendList)
       return res
         .status(400)
         .json({ success: false, message: "Something happened in the BE" });
 
-    const oldFriendList = [...userFriendList.friendList];
-    console.log(oldFriendList);
-
-    await userFriendList.friendList.push(friendId);
     return res.status(200).json({
       success: true,
       message: "Add new friend successfully",
-      userFriendList,
     });
   } catch (err) {
     return res
@@ -92,13 +90,26 @@ router.post("/add", verifyToken, async (req, res) => {
 //UNFRIEND
 router.delete("/delete", verifyToken, async (req, res) => {
   const { userId } = req;
-  if (!userIf)
+  const { friendId } = req.body;
+
+  if (!userId || !friendId)
     return res
       .status(401)
       .json({ success: false, message: "user id not found" });
 
   try {
-    const userFriendList = FriendList.findOneAndDelete({ userId });
+    const userFriendList = await FriendList.findOneAndUpdate(
+      { userId },
+      { $pull: { friendList: friendId } }
+    );
+    if (!userFriendList)
+      return res.status(404).json({
+        success: false,
+        message: "Cant find this friend, please try again",
+      });
+    return res
+      .status(200)
+      .json({ success: true, message: "Unfriend successfully!" });
   } catch (err) {
     return res
       .status(500)

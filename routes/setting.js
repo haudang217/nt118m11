@@ -54,5 +54,24 @@ router.post("/create", verifyToken, async (req, res) => {
 });
 
 //EDIT SETTING API
+router.put("/change", verifyToken, async (req, res) => {
+  const { userId } = req;
+  const { pomodoro, alarm, breaktime } = req.body;
+  if (!userId || !pomodoro || !alarm || !breaktime)
+    return res
+      .status(401)
+      .json({ success: false, message: "Account id not found" });
+
+  try {
+    await Setting.findOneAndUpdate({ userId }, { pomodoro, alarm, breaktime });
+    return res
+      .status(200)
+      .json({ success: true, message: "Update setting successfully" });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error: " + err });
+  }
+});
 
 module.exports = router;

@@ -7,10 +7,12 @@ const FriendSchema = new Schema({
     required: true,
     unique: true,
   },
-  friendList: {
-    type: Array,
-    default: ["1234"], //mang userID cua ban be
-  },
+  friendList: [
+    {
+      type: String,
+      unique: true,
+    },
+  ],
 });
 
 module.exports = mongoose.model("friendlist", FriendSchema);
