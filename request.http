@@ -97,8 +97,26 @@ Content-Type: application/json
 POST http://localhost:3001/friendlist/create
 Content-Type: application/json
 
+//HOBBY API 
 
+###
+GET http://localhost:3001/hobby
 
+###
+POST http://localhost:3001/hobby/create
+Content-Type: application/json
 
+{
+    "name": "Hobby 02",
+    "desc": "This is just a 2 testing message",
+    "timeLimit": 400
+}
 
+###
+DELETE  http://localhost:3001/hobby/delete
+Content-Type: application/json
+
+{
+    "hobbyId": "618dce3d3829f77a14f6ca56"
+}
 
