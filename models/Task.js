@@ -11,7 +11,7 @@ const TaskSchema = new Schema({
     required: true,
   },
   deadline: {
-    type: Date,
+    type: String,
     required: true,
   },
   totalTime: {
@@ -22,11 +22,21 @@ const TaskSchema = new Schema({
     type: Number,
     required: true,
   },
-  status: {
-    type: Boolean, //true la xong, false la chua xong
-    required: true,
-    default: false,
+
+  //BE tu tinh toan
+  pomodoroPeriod: {
+    type: Number,
+    default: 0,
   },
+  done: {
+    type: Number, //so task da xong
+    default: 0,
+  },
+  schedule: [
+    {
+      type: Date,
+    },
+  ],
 });
 
 module.exports = mongoose.model("task", TaskSchema);

@@ -21,6 +21,16 @@ const SettingSchema = new Schema({
     required: true,
     default: 05,
   },
+  maxPeriod: {
+    type: Number,
+    required: true,
+    default: 5,
+  },
+  minPeriod: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
 });
 
 module.exports = mongoose.model("setting", SettingSchema);

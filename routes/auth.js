@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
 //dang ky phai goi luon API de tao list friend va setting
 //REGISTER API
 router.post("/register", async (req, res) => {
-  const { username, password, fullname } = req.body;
+  const { username, password, fullname, maxPeriod, minPeriod } = req.body;
 
   if (!username || !password || !fullname) {
     return res
@@ -66,7 +66,13 @@ router.post("/register", async (req, res) => {
     //neu khong tim thay, tao moi roi them user vao DB
     //a ma khoan, hash password da
     const hashedPassword = await argon2.hash(password);
-    const newUser = new User({ username, password: hashedPassword, fullname });
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      fullname,
+      maxPeriod,
+      minPeriod,
+    });
 
     //them vao DB ne
     await newUser.save();
