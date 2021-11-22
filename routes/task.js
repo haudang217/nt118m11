@@ -4,6 +4,7 @@ const argon2 = require("argon2");
 const Task = require("../models/Task");
 const verifyToken = require("../middlewares/auth.middleware");
 const router = express.Router();
+const timingAlgo = require("../asyncFunctions/timingAlgo");
 
 require("dotenv").config();
 
@@ -16,6 +17,7 @@ router.get("/", verifyToken, async (req, res) => {
       message: "User account not fount",
     });
 
+  timingAlgo();
   try {
     const tasks = await Task.find({ userId: req.userId });
     if (!tasks)

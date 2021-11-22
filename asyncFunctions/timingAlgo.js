@@ -12,53 +12,48 @@ const calcNextSunday = () => {
 
 //tinh toan task cho moi ngay tu min va max. vd: 5,4,3,2,1...
 const calcRange = (start, end) => {
-  return Array(end - start + 1)
-    .fill()
-    .map((_, idx) => start + idx);
+  let arr = new Array(end - start + 1).fill().map((_, idx) => start + idx);
+
+  if (arr.length < 8) {
+    let index = 8 - arr.length;
+    let lastItem = arr[arr.length - 1];
+    let prevLastItem = arr[arr.length - 2];
+    arr[6] = prevLastItem;
+    arr[7] = lastItem;
+    console.log("arr[6]: ");
+    console.log(arr);
+
+    for (let i = 0; i < index; i++) {
+      arr[5 - i] = arr[6];
+    }
+  }
+  return arr;
 };
 
+let taskArr = [
+  { name: "taskA", deadline: "12182021" },
+  { name: "taskB", deadline: "12222021" },
+  { name: "taskC", deadline: "11242021" },
+  { name: "taskD", deadline: "12192021" },
+  { name: "taskE", deadline: "11252021" },
+];
+
+let maxTask = 5;
+let minTask = 1;
+let userDateRange = [7, 6, 1, 5, 4, 2, 3, 0];
 //phan chia task
-const timingAlgo = ({ taskArr, maxTask, minTask }) => {
-  //tinh ngay, thang cua chu nhat tiep theo
-  let nextSunday = calcNextSunday();
-  const nextMonth = nextSunday.toString().split("/")[0];
-  const nextDate = nextSunday.toString().split("/")[1];
+const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
+  //1. tinh tong so pomodoro cho toi 1 deadline gan nhat
 
-  //tinh so pomodoro moi ngay user can lam
-  const taskDateArr = calcRange(minTask, maxTask);
-
-  //dem xem trong tuan do user lam duoc bao nhieu task
-  let userWeekTask = 0;
-  taskDateArr.forEach((element) => {
-    userWeekTask += element;
+  //sort mang, sap xep ngay deadline tang dan
+  var sortedTask = taskArr.slice(0);
+  sortedTask.sort((a, b) => {
+    return parseInt(a.deadline) - parseInt(b.deadline);
   });
 
-  //tinh xem so task CO DEADLINE TRUOC CUOI TUAN co bao nhieu pomodoro
-  let weekTaskPomodoro = 0;
-
-  taskArr.forEach((element) => {
-    const eleDate = element.deadline.split("/")[1];
-    const eleMonth = element.deadline.split("/")[0];
-    if (eleDate <= nextDate && eleMonth <= nextMonth) {
-      weekTaskPomodoro += element.pomodoroPeriod - element.done;
-    }
-  });
-
-  //neu so task can lam trong tuan > so task user co the lam
-  //thi bat user tang so task moi ngay len
-  if (weekTaskPomodoro > userWeekTask) return false;
-
-  //neu nhu so task can lam trong tuan be hon so task user co the lam duoc
-  //thi tiep tuc chia
-
-  //neu nhung viec ko phai deadline tuan nay, ma la ngay t2 tuan sau thi sao?
-  //neu nhung viec ko phai deadline tuan nay, ma tuan sau lam ko kip thi sao?
-  //solution:
-  //chia lam 2 truong hop:
-  //- truong hop so task it hon thoi gian con lai, trra ve va bat user tang task len
-  //- truong hop so task nhieu hon thoi gian con lai, tinh sau
-
-  //tim cac task co kha nang khong kip deadline
+  //tinh toan so luong pomodoro cho moi ngay
+  let pomodoroRange = calcRange(1, 7);
+  console.log(pomodoroRange);
 };
 
 module.exports = timingAlgo;
