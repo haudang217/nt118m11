@@ -24,7 +24,7 @@ const calcRange = (start, end) => {
 let taskArr = [
   {
     name: "taskA",
-    deadline: "2021-11-26",
+    deadline: "2021-11-28",
     pomodoroPeriod: 3,
     done: 0,
     startDay: "",
@@ -89,19 +89,18 @@ const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
         pomodoroTilThisDay += pomodoroRange[curWeekDate - 1];
       }
 
-      console.log("til this day: " + pomodoroTilThisDay);
       //B. so sanh voi task co deadline gan nhat
       let pomodoroLeft = task.pomodoroPeriod - task.done;
+
       //neu THIEU thoi gian
       if (pomodoroLeft > pomodoroTilThisDay) {
         newMaxTask += 1; //tang gia tri task toi da len de kip tien do
-        console.log("Task: " + task.name + " khong kip tien do!");
         flag = 1;
         return;
       }
 
       //neu DU thoi gian
-      else if (pomodoroLeft <= pomodoroTilThisDay) {
+      else if (pomodoroLeft === pomodoroTilThisDay) {
         flag = 0;
         task.startDay = thisDay.format("YYYY-MM-DD");
         task.endDay = nearestDeadline.format("YYYY-MM-DD");
@@ -111,30 +110,32 @@ const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
         return;
       }
       //neu THUA thoi gian
-      // else if (pomodoroLeft > pomodoroTilThisDay) {
-      //   let remainder = 0;
+      else if (pomodoroLeft < pomodoroTilThisDay) {
+        let remainder = 0;
 
-      //   while (thisDay.isBefore(nearestDeadline)) {
-      //     let nextDate = thisDay.add(1, "days");
-      //     let nextWeekDate = moment(nextDate).isoWeekday();
-      //     remainder += pomodoroRange[nextWeekDate];
-      //     //2 truong hop: thua chan va thua le
-      //     //doi voi thua chan (vua het ngay)
-      //     if (remainder == pomodoroLeft) {
-      //       task.startDay = thisDay;
-      //       task.endDay = nextDate;
-      //       thisDay = nextDay.add(1, "days");
-      //       return true;
-      //     }
-      //     //doi voi truong hop thua le
-      //     if (remainder > pomodoroLeft) {
-      //       task.startDay = thisDay;
-      //       task.endDay = nextDate;
-      //       thisDay = nextDay.add(1, "days");
-      //       return true;
-      //     }
-      //   }
-      // }
+        let nextDate = moment(thisDay, "YYYY-MM-DD");
+
+        while (nextDate.isBefore(nearestDeadline)) {
+          nextDate = nextDate.add(1, "days");
+          let nextWeekDate = moment(nextDate).isoWeekday();
+          remainder += pomodoroRange[nextWeekDate - 1];
+          //2 truong hop: thua chan va thua le
+          //doi voi thua chan (vua het ngay)
+          if (remainder == pomodoroLeft) {
+            task.startDay = thisDay.format("YYYY-MM-DD");
+            task.endDay = nextDate.format("YYYY-MM-DD");
+            thisDay = nextDate.add(1, "days");
+            return;
+          }
+          //doi voi truong hop thua le
+          if (remainder > pomodoroLeft) {
+            task.startDay = thisDay.format("YYYY-MM-DD");
+            task.endDay = nextDate.format("YYYY-MM-DD");
+            thisDay = nextDate.add(1, "days");
+            return;
+          }
+        }
+      }
     });
   } while (flag === 1); //neu bat co len tuc la co van de, chua du thoi gian
 
