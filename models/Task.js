@@ -32,11 +32,12 @@ const TaskSchema = new Schema({
     type: Number, //so task da xong
     default: 0,
   },
-  schedule: [
-    {
-      type: Date,
-    },
-  ],
+  startDay: {
+    type: String,
+  },
+  endDay: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("task", TaskSchema);
