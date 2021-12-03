@@ -5,6 +5,7 @@ const taskRouter = require("./routes/task");
 const settingRouter = require("./routes/setting");
 const friendRouter = require("./routes/friendList");
 const hobbyRouter = require("./routes/hobby");
+const userRouter = require("./routes/users");
 const connectDB = require("./asyncFunctions/DBConnect");
 const cors = require("cors");
 app.use(express.json());
@@ -26,5 +27,8 @@ app.use("/friendlist", friendRouter);
 
 //API hobby
 app.use("/hobby", hobbyRouter);
+
+//API get all users
+app.use("/user", userRouter);
 
 module.exports = app;

@@ -22,6 +22,11 @@ const TaskSchema = new Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: String,
+    default: "hello this is a testing message",
+    required: true,
+  },
 
   //BE tu tinh toan
   pomodoroPeriod: {

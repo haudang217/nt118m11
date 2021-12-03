@@ -25,6 +25,7 @@ router.post("/login", async (req, res) => {
         .status(400)
         .json({ success: false, message: "Account not found" });
 
+    console.log("id: " + user._id);
     //neu kiem ra
     const accessToken = jwt.sign(
       { userId: user._id },
@@ -45,15 +46,13 @@ router.post("/login", async (req, res) => {
 //dang ky phai goi luon API de tao list friend va setting
 //REGISTER API
 router.post("/register", async (req, res) => {
-  const { username, password, fullname, maxPeriod, minPeriod } = req.body;
+  const { fullname, username, password, sex, email } = req.body;
 
-  if (!username || !password || !fullname) {
+  if (!username || !password || !fullname || !sex || !email) {
     return res
       .status(400)
-      .json({ success: false, message: "Missing username / password !" });
+      .json({ success: false, message: "Missing fields !" });
   }
-
-  console.log("New user: " + username);
 
   //tim trong db co cai ten nao giong z chua
   try {
@@ -70,8 +69,8 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
       fullname,
-      maxPeriod,
-      minPeriod,
+      email,
+      sex,
     });
 
     //them vao DB ne

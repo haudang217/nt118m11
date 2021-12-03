@@ -3,7 +3,7 @@ POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "username": "Duy Tung 02",
+    "username": "duytung03",
     "password": "1611",
     "fullname": "Nguyen Duy Tung"
 }
@@ -13,9 +13,14 @@ POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "username": "Duy Tung",
+    "username": "duytung02",
     "password" : "1611"
 }
+
+//GET ALL USER 
+###
+GET http://localhost:3001/user/all
+Content-Type: application/json
 
 //TASK 
 ###
@@ -23,10 +28,11 @@ POST http://localhost:3001/task/add
 Content-Type: application/json
 
 {
-    "taskname": "Task 02",
+    "userId": "61a6f19070d0ae5721423184",
+    "taskname": "Task 04",
     "totalTime" : 200,  
     "deadline" : "Wed, 21 Oct 2015 18:27:50 GMT",
-    "importantRate": 5
+    "importantRate": 6
 
 }
 
@@ -43,7 +49,7 @@ Content-Type: application/json
 GET http://localhost:3001/task/
 Content-Type: application/json
 
-###
+###textInput
 DELETE http://localhost:3001/task/delete
 Content-Type: application/json
 

@@ -17,7 +17,6 @@ router.get("/", verifyToken, async (req, res) => {
       message: "User account not fount",
     });
 
-  timingAlgo();
   try {
     const tasks = await Task.find({ userId: req.userId });
     if (!tasks)
