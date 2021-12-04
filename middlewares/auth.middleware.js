@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => {
   //lay token ra
   const authHeader = req?.header("Authorization");
-  const token =
-    (authHeader && authHeader.split(" ")[1]) || process.env.TEST_TOKEN;
+  let token = authHeader.split(" ")[1];
+
   //khong tim thay token
   if (!token) {
     return res
@@ -14,10 +14,14 @@ const verifyToken = (req, res, next) => {
 
   //neu co token
   try {
-    const decoded = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET);
+    console.log("token: " + token);
+    const decoded = jwt.verify(
+      JSON.parse(token),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+
     req.userId = decoded.userId;
     console.log("user id: " + req.userId);
-
     next(); //passed
   } catch (err) {
     console.log("Auth middleware error: " + err);
