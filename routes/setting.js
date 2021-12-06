@@ -56,14 +56,14 @@ router.post("/create", verifyToken, async (req, res) => {
 //EDIT SETTING API
 router.put("/change", verifyToken, async (req, res) => {
   const { userId } = req;
-  const { pomodoro, alarm, breaktime } = req.body;
-  if (!userId || !pomodoro || !alarm || !breaktime)
+  const { pomodoro, breaktime } = req.body;
+  if (!userId || !pomodoro || !breaktime)
     return res
       .status(401)
       .json({ success: false, message: "Account id not found" });
 
   try {
-    await Setting.findOneAndUpdate({ userId }, { pomodoro, alarm, breaktime });
+    await Setting.findOneAndUpdate({ userId }, { pomodoro, breaktime });
     return res
       .status(200)
       .json({ success: true, message: "Update setting successfully" });

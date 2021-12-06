@@ -94,18 +94,49 @@ router.delete("/delete", verifyToken, async (req, res) => {
 //EDIT TASK
 router.put("/edit", verifyToken, async (req, res) => {
   const { userId } = req;
-  const { taskId, taskname } = req.body;
+  const { taskId, taskname, deadline, importantRate, totalTime, description } =
+    req.body;
   if (!userId || !taskId || !taskname)
     return res
       .status(401)
       .json({ success: false, message: "User id not found" });
 
   try {
-    await Task.findOneAndUpdate({ _id: taskId }, { taskname });
+    await Task.findOneAndUpdate(
+      { _id: taskId },
+      { taskname, deadline, importantRate, totalTime, description }
+    );
 
     return res
       .status(200)
       .json({ success: true, message: "Update task successfully!" });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error: " + err,
+    });
+  }
+});
+
+//UPDATE POMODORO DONE
+router.put("/update/pomodoro", verifyToken, async (req, res) => {
+  const { userId } = req;
+  const { taskId } = req.body;
+
+  if (!taskId || !userId)
+    return res.status(401).json({ success: false, message: "Bad request" });
+
+  try {
+    let donePomodoro = await Task.findOne({ _id: taskId }, { done: 1 });
+    donePomodoro += 1;
+    const task = await Task.findOneAndUpdate(
+      { _id: taskId },
+      { done: donePomodoro }
+    );
+    if (task)
+      return res
+        .status(200)
+        .json({ success: true, message: "update pomodoro successfully", task });
   } catch (err) {
     return res.status(500).json({
       success: false,

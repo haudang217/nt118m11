@@ -11,25 +11,10 @@ const SettingSchema = new Schema({
     required: true,
     default: 25,
   },
-  alarm: {
-    type: String,
-    required: true,
-    default: "05:00",
-  },
   breaktime: {
     type: Number,
     required: true,
     default: 05,
-  },
-  maxPeriod: {
-    type: Number,
-    required: true,
-    default: 5,
-  },
-  minPeriod: {
-    type: Number,
-    required: true,
-    default: 1,
   },
 });
 

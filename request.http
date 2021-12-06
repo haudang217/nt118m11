@@ -76,6 +76,16 @@ Content-Type: application/json
     "taskId": "618c7b18959b278c13a96a63"
 }
 
+###
+
+PUT http://localhost:3001/task/update/pomodoro
+Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+
+{
+    "taskId": "618c7b18959b278c13a96a63"
+}
+
 
 //SETTING
 ###
