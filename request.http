@@ -28,6 +28,18 @@ GET http://localhost:3001/user/info
 Content-Type: application/json
 Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg3NTM5MzF9.6lOpcf1ppLwNiWFkD-sN7Pa9ZkCKAwLYC7MHfJW5gkE"
 
+//UPDATE USER INFO 
+###
+PUT http://localhost:3001/user/edit
+Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg3NTM5MzF9.6lOpcf1ppLwNiWFkD-sN7Pa9ZkCKAwLYC7MHfJW5gkE"
+
+{
+    "fullname": "Duy Tung 02",
+    "password" : "1611",
+    "email": "new email"
+}
+
 //TASK 
 ###
 POST http://localhost:3001/task/add
