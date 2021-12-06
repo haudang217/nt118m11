@@ -24,7 +24,7 @@ const calcRange = (start, end) => {
 let taskArr = [
   {
     name: "taskA",
-    deadline: "2021-11-28",
+    deadline: "2021-11-28Tjwbfdwjefw",
     pomodoroPeriod: 3,
     done: 0,
     startDay: "",
@@ -33,7 +33,7 @@ let taskArr = [
   },
   {
     name: "taskB",
-    deadline: "2021-12-28",
+    deadline: "2021-12-28Tsjfnklnwefwe",
     pomodoroPeriod: 5,
     done: 0,
     startDay: "",
@@ -42,7 +42,7 @@ let taskArr = [
   },
 ];
 
-let maxTask = 5;
+let maxTask = 6;
 let newMaxTask = 0;
 let minTask = 1;
 let userDateRange = [7, 6, 1, 5, 3, 0];
@@ -56,8 +56,8 @@ const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
 
   sortedTask.sort((a, b) => {
     return (
-      parseInt(a.deadline.replace(/-/g, "")) -
-      parseInt(b.deadline.replace(/-/g, ""))
+      parseInt(a.deadline.split("T")[0].replace(/-/g, "")) -
+      parseInt(b.deadline.split("T")[0].replace(/-/g, ""))
     );
   });
 
@@ -75,7 +75,8 @@ const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
 
     sortedTask.forEach((task) => {
       //tinh day of week cua deadline gan nhat
-      let pomodoroRange = calcRange(minTask, newMaxTask);
+      // let pomodoroRange = calcRange(minTask, newMaxTask);
+      let pomodoroRange = [5, 5, 5, 5, 5, 5, 5];
 
       nearestDeadline = moment(task.deadline, "YYYY-MM-DD");
 

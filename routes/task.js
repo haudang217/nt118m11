@@ -17,8 +17,11 @@ router.get("/", verifyToken, async (req, res) => {
       message: "User account not fount",
     });
 
+  timingAlgo();
+
   try {
-    const tasks = await Task.find({ userId: req.userId });
+    let tasks = await Task.find({ userId });
+
     if (!tasks)
       return res.status(404).json({ success: false, message: "No task found" });
     return res
@@ -34,6 +37,7 @@ router.get("/", verifyToken, async (req, res) => {
 //ADD NEW TASK API
 router.post("/add", verifyToken, async (req, res) => {
   const { taskname, deadline, totalTime, importantRate } = req.body;
+  console.log(req.body);
 
   //thieu truong thi tra ve
   if (!taskname || !deadline || !totalTime || !importantRate)
