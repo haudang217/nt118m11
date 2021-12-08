@@ -37,7 +37,7 @@ router.get("/info", verifyToken, async (req, res) => {
   try {
     const userInfo = await User.findOne(
       { _id: userId },
-      { username: 1, fullname: 1, email: 1, sex: 1 }
+      { username: 1, fullname: 1, email: 1, sex: 1, _id: 1 }
     );
 
     if (!userInfo)
@@ -68,8 +68,37 @@ router.put("/edit", verifyToken, async (req, res) => {
   try {
     const newInfo = await User.findOneAndUpdate(
       { _id: userId },
-      { fullname, email, newPassword },
+      { fullname, email, password: newPassword },
       { new: true }
+    );
+
+    if (!newInfo)
+      return res
+        .status(404)
+        .json({ success: false, message: "Something happened" });
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Change user info success", newInfo });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error: " + err });
+  }
+});
+
+router.put("/edit-time", verifyToken, async (req, res) => {
+  const { userId } = req;
+
+  console.log(req.body);
+  const { pomodoroTime, breaktime } = req.body;
+  if (!pomodoroTime || !breaktime)
+    return res.status(401).json({ sucess: false, message: "Missing field" });
+
+  try {
+    const newInfo = await User.findOneAndUpdate(
+      { _id: userId },
+      { pomodoroTime, breaktime }
     );
 
     if (!newInfo)

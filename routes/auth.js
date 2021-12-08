@@ -4,12 +4,23 @@ const argon2 = require("argon2");
 const User = require("../models/User");
 const Setting = require("../models/Setting");
 const jwt = require("jsonwebtoken");
+const newTimingAlgo = require("../asyncFunctions/newTimingAlgo");
 
 require("dotenv").config();
 
 //LOGIN API
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log("logging in");
+
+  let a = false;
+  let counter = 1;
+  while (a == false) {
+    counter += 1;
+    a = newTimingAlgo(counter);
+    console.log("enough? : " + a + " - " + counter);
+    console.log("-----------------------------");
+  }
 
   //neu ko co thi tra ve ko co data
   if (!username || !password)
@@ -26,6 +37,7 @@ router.post("/login", async (req, res) => {
         .json({ success: false, message: "Account not found" });
 
     console.log("id: " + user._id);
+
     //neu kiem ra
     const accessToken = jwt.sign(
       { userId: user._id },

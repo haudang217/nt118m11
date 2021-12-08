@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => {
   //lay token ra
   const authHeader = req?.header("Authorization");
+  console.log("header: " + authHeader);
   let token = authHeader.split(" ")[1];
 
   //khong tim thay token

@@ -13,7 +13,7 @@ POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "username": "duytung02",
+    "username": "tung02",
     "password" : "1611"
 }
 
@@ -36,7 +36,7 @@ Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE
 
 {
     "fullname": "Duy Tung 02",
-    "password" : "1611",
+    "password" : "1611",    
     "email": "new email"
 }
 
@@ -59,21 +59,45 @@ PUT http://localhost:3001/task/edit
 Content-Type: application/json
 
 {
-    "taskId": "618c7b15959b278c13a96a61",
-    "taskname": "new task name testing"
+    "_id": "61af03cfe7d3d69eb2947273",
+    "taskname": "new task name testing",
+    "deadline":"2021-27-12",
+    "totalTime" : 25,
+    "description":"just a testing",
+    "importantRate": 4
 }
 
 ###
 GET http://localhost:3001/task/
 Content-Type: application/json
-Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 
-###textInput
-DELETE http://localhost:3001/task/delete
+###
+POST http://localhost:3001/setting/create
 Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 
 {
-    "taskId": "618c7b18959b278c13a96a63"
+    "name" : "bullshit"
+}
+
+###
+PUT http://localhost:3001/user/edit-time
+Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+
+{
+    "pomodoroTime":15,
+    "breaktime": 5
+}
+
+###
+DELETE http://localhost:3001/task/delete
+Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+
+{
+    "taskId": "61ab1abe319c8490c80725f8"
 }
 
 ###
@@ -95,15 +119,14 @@ Content-Type: application/json
 {
     "userId" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MThjNzUyYWQ5ZGM2YjI0OWYxNzkwZmIiLCJpYXQiOjE2MzY1OTQ5ODZ9.G3AQPKNoGmIf4WdttEczB61yLY6Uw6KbPrDEkYixXi0"
 }
-
 ###
 PUT http://localhost:3001/setting/change
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 Content-Type: application/json
 
 {
     "pomodoro": 15,
-    "breaktime": 10,
-    "alarm": "16:00"
+    "breaktime": 10
 }
 
 ###

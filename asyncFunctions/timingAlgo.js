@@ -78,16 +78,14 @@ const timingAlgo = (/*taskArr, maxTask, minTask, userDateRange*/) => {
       // let pomodoroRange = calcRange(minTask, newMaxTask);
       let pomodoroRange = [5, 5, 5, 5, 5, 5, 5];
 
-      nearestDeadline = moment(task.deadline, "YYYY-MM-DD");
+      nearestDeadline = moment(task.deadline.split("T")[0], "YYYY-MM-DD");
 
       let pomodoroTilThisDay = 0;
       //A. tinh toan so pomodoro cho den deadline gan nhat
       let curRangeDate = moment(thisDay, "YYYY-MM-DD");
 
       while (curRangeDate.isBefore(nearestDeadline)) {
-        curRangeDate = moment(curRangeDate).add(1, "day");
-        let curWeekDate = moment(curRangeDate).isoWeekday();
-        pomodoroTilThisDay += pomodoroRange[curWeekDate - 1];
+        pomodoroTilThisDay += 5;
       }
 
       //B. so sanh voi task co deadline gan nhat

@@ -17,8 +17,6 @@ router.get("/", verifyToken, async (req, res) => {
       message: "User account not fount",
     });
 
-  timingAlgo();
-
   try {
     let tasks = await Task.find({ userId });
 
@@ -92,18 +90,22 @@ router.delete("/delete", verifyToken, async (req, res) => {
 });
 
 //EDIT TASK
-router.put("/edit", verifyToken, async (req, res) => {
-  const { userId } = req;
-  const { taskId, taskname, deadline, importantRate, totalTime, description } =
+router.put("/edit", async (req, res) => {
+  const { _id, taskname, deadline, importantRate, totalTime, description } =
     req.body;
-  if (!userId || !taskId || !taskname)
-    return res
-      .status(401)
-      .json({ success: false, message: "User id not found" });
+  if (
+    !_id ||
+    !taskname ||
+    !deadline ||
+    !importantRate ||
+    !totalTime ||
+    !description
+  )
+    return res.status(401).json({ success: false, message: "Missing fields" });
 
   try {
     await Task.findOneAndUpdate(
-      { _id: taskId },
+      { _id: _id },
       { taskname, deadline, importantRate, totalTime, description }
     );
 

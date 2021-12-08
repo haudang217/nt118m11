@@ -27,6 +27,14 @@ const UserSchema = new Schema({
     type: Number,
     default: 0,
   },
+  pomodoroTime: {
+    type: Number,
+    default: 25,
+  },
+  breaktime: {
+    type: Number,
+    default: 5,
+  },
 });
 
 module.exports = mongoose.model("user", UserSchema);

@@ -31,7 +31,7 @@ router.get("/", verifyToken, async (req, res) => {
 });
 
 //SET SETTING API
-router.post("/create", verifyToken, async (req, res) => {
+router.get("/create", verifyToken, async (req, res) => {
   const { userId } = req;
   if (!userId)
     return res
@@ -39,6 +39,12 @@ router.post("/create", verifyToken, async (req, res) => {
       .json({ success: false, message: "Account not found!" });
 
   try {
+    const findSetting = Setting.find({ userId });
+    if (findSetting)
+      return res
+        .status(401)
+        .json({ success: false, message: "Setting already exists" });
+
     const newSetting = new Setting({ userId });
 
     await newSetting.save();
@@ -56,11 +62,10 @@ router.post("/create", verifyToken, async (req, res) => {
 //EDIT SETTING API
 router.put("/change", verifyToken, async (req, res) => {
   const { userId } = req;
+  console.log(req.body);
   const { pomodoro, breaktime } = req.body;
-  if (!userId || !pomodoro || !breaktime)
-    return res
-      .status(401)
-      .json({ success: false, message: "Account id not found" });
+  if (!pomodoro || !breaktime)
+    return res.status(401).json({ success: false, message: "missing filed" });
 
   try {
     await Setting.findOneAndUpdate({ userId }, { pomodoro, breaktime });
