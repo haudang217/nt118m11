@@ -32,7 +32,7 @@ router.get("/", verifyToken, async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true, message: "Get tasks successfully", tasks });
+      .json({ success: true, message: "Get tasks successfully", tasks: a });
   } catch (err) {
     return res
       .status(500)

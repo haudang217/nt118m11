@@ -4,6 +4,9 @@ const newTimingAlgo = (maxTask = 1, taskArr) => {
   let sortedTask = taskArr.slice(0);
 
   sortedTask.sort((a, b) => {
+    return b.importantRate - a.importantRate;
+  });
+  sortedTask.sort((a, b) => {
     return (
       parseInt(a.deadline.split("T")[0].replace(/-/g, "")) -
       parseInt(b.deadline.split("T")[0].replace(/-/g, ""))
@@ -48,7 +51,7 @@ const newTimingAlgo = (maxTask = 1, taskArr) => {
 
   sortedTask.map((task) => console.log(task));
 
-  return flag;
+  return sortedTask;
 };
 
 module.exports = newTimingAlgo;
