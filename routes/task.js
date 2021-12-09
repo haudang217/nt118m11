@@ -102,7 +102,7 @@ router.delete("/delete", verifyToken, async (req, res) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ succesS: false, message: "Internal server error: " + err });
+      .json({ success: false, message: "Internal server error: " + err });
   }
 });
 
@@ -138,24 +138,36 @@ router.put("/edit", async (req, res) => {
 });
 
 //UPDATE POMODORO DONE
-router.put("/update/pomodoro", verifyToken, async (req, res) => {
-  const { userId } = req;
+router.put("/update/pomodoro", async (req, res) => {
   const { taskId } = req.body;
 
-  if (!taskId || !userId)
+  if (!taskId)
     return res.status(401).json({ success: false, message: "Bad request" });
 
   try {
-    let donePomodoro = await Task.findOne({ _id: taskId }, { done: 1 });
-    donePomodoro += 1;
-    const task = await Task.findOneAndUpdate(
+    let donePomodoro = await Task.findOne(
       { _id: taskId },
-      { done: donePomodoro }
+      { done: 1, pomodoroPeriod: 1 }
     );
-    if (task)
-      return res
-        .status(200)
-        .json({ success: true, message: "update pomodoro successfully", task });
+
+    let newPmdr = (await donePomodoro.done) + 1;
+    if (newPmdr <= (await donePomodoro.pomodoroPeriod)) {
+      const task = await Task.findOneAndUpdate(
+        { _id: taskId },
+        { done: newPmdr }
+      );
+      if (task)
+        return res
+          .status(200)
+          .json({
+            success: true,
+            message: "update pomodoro successfully",
+            task,
+          });
+    }
+    return res
+      .status(403)
+      .json({ success: false, message: "task done already" });
   } catch (err) {
     return res.status(500).json({
       success: false,

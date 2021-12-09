@@ -104,10 +104,9 @@ Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE
 
 PUT http://localhost:3001/task/update/pomodoro
 Content-Type: application/json
-Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 
 {
-    "taskId": "618c7b18959b278c13a96a63"
+    "taskId": "61b176270ce3607ecba7d154"
 }
 
 
@@ -178,3 +177,10 @@ Content-Type: application/json
     "hobbyId": "618dce3d3829f77a14f6ca56"
 }
 
+###
+PUT http://localhost:3001/task/update/pomodoro
+Content-Type: application/json
+
+{
+    "taskId" : "61b1ac5b27ab4188982a7cd9"
+}
