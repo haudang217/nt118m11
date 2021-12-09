@@ -38,9 +38,11 @@ const TaskSchema = new Schema({
   },
   startDay: {
     type: String,
+    default: new Date().toISOString(),
   },
   endDay: {
     type: String,
+    default: new Date().toISOString(),
   },
   taskPerDay: {
     type: Number,

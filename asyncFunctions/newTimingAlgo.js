@@ -2,6 +2,7 @@ const moment = require("moment");
 
 const newTimingAlgo = (maxTask = 1, taskArr) => {
   let sortedTask = taskArr.slice(0);
+
   sortedTask.sort((a, b) => {
     return (
       parseInt(a.deadline.split("T")[0].replace(/-/g, "")) -
@@ -25,7 +26,7 @@ const newTimingAlgo = (maxTask = 1, taskArr) => {
       moment(task.deadline.split("T")[0]).format("YYYY-MM-DD").replace(/-/g, "")
     );
 
-    while (StartDayBuffer < nearestDeadline) {
+    while (StartDayBuffer <= nearestDeadline) {
       StartDayBuffer += 1;
       counter += 1;
       pomodoroTilDeadline += task.taskPerDay;
@@ -47,7 +48,7 @@ const newTimingAlgo = (maxTask = 1, taskArr) => {
 
   sortedTask.map((task) => console.log(task));
 
-  return sortedTask;
+  return flag;
 };
 
 module.exports = newTimingAlgo;
