@@ -37,7 +37,15 @@ router.get("/info", verifyToken, async (req, res) => {
   try {
     const userInfo = await User.findOne(
       { _id: userId },
-      { username: 1, fullname: 1, email: 1, sex: 1, _id: 1 }
+      {
+        username: 1,
+        fullname: 1,
+        email: 1,
+        sex: 1,
+        _id: 1,
+        pomodoroTime: 1,
+        breaktime: 1,
+      }
     );
 
     if (!userInfo)

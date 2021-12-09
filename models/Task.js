@@ -24,7 +24,6 @@ const TaskSchema = new Schema({
   },
   description: {
     type: String,
-    default: "hello this is a testing message",
     required: true,
   },
 
@@ -42,6 +41,10 @@ const TaskSchema = new Schema({
   },
   endDay: {
     type: String,
+  },
+  taskPerDay: {
+    type: Number,
+    default: 0,
   },
 });
 

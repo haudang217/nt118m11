@@ -4,7 +4,7 @@ const argon2 = require("argon2");
 const Task = require("../models/Task");
 const verifyToken = require("../middlewares/auth.middleware");
 const router = express.Router();
-const timingAlgo = require("../asyncFunctions/timingAlgo");
+const newTimingAlgo = require("../asyncFunctions/newTimingAlgo");
 
 require("dotenv").config();
 
@@ -22,9 +22,17 @@ router.get("/", verifyToken, async (req, res) => {
 
     if (!tasks)
       return res.status(404).json({ success: false, message: "No task found" });
+
+    let a = false;
+    let counter = 1;
+    while (a == false) {
+      counter += 1;
+      a = newTimingAlgo(counter, tasks);
+    }
+
     return res
       .status(200)
-      .json({ success: true, message: "Get tasks successfully", tasks });
+      .json({ success: true, message: "Get tasks successfully", tasks: a });
   } catch (err) {
     return res
       .status(500)
@@ -34,7 +42,14 @@ router.get("/", verifyToken, async (req, res) => {
 
 //ADD NEW TASK API
 router.post("/add", verifyToken, async (req, res) => {
-  const { taskname, deadline, totalTime, importantRate } = req.body;
+  const {
+    taskname,
+    deadline,
+    totalTime,
+    importantRate,
+    description,
+    pomodoroPeriod,
+  } = req.body;
   console.log(req.body);
 
   //thieu truong thi tra ve
@@ -47,6 +62,8 @@ router.post("/add", verifyToken, async (req, res) => {
     deadline,
     totalTime,
     importantRate,
+    description,
+    pomodoroPeriod,
     userId: req.userId,
   });
 

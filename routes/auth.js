@@ -13,15 +13,6 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log("logging in");
 
-  let a = false;
-  let counter = 1;
-  while (a == false) {
-    counter += 1;
-    a = newTimingAlgo(counter);
-    console.log("enough? : " + a + " - " + counter);
-    console.log("-----------------------------");
-  }
-
   //neu ko co thi tra ve ko co data
   if (!username || !password)
     return res.status(400).json({ success: false, message: "Missing field" });
