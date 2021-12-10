@@ -35,6 +35,9 @@ const UserSchema = new Schema({
     type: Number,
     default: 5,
   },
+  avt: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("user", UserSchema);

@@ -67,8 +67,8 @@ router.get("/info", verifyToken, async (req, res) => {
 router.put("/edit", verifyToken, async (req, res) => {
   const { userId } = req;
 
-  const { fullname, password, email } = req.body;
-  if (!fullname || !password || !email || !userId)
+  const { fullname, password, email, avt } = req.body;
+  if (!fullname || !password || !email || !userId || !avt)
     return res.status(401).json({ success: false, message: "Missing field" });
 
   const newPassword = await argon2.hash(password);
@@ -76,7 +76,7 @@ router.put("/edit", verifyToken, async (req, res) => {
   try {
     const newInfo = await User.findOneAndUpdate(
       { _id: userId },
-      { fullname, email, password: newPassword },
+      { fullname, email, password: newPassword, avt },
       { new: true }
     );
 
@@ -99,7 +99,9 @@ router.put("/edit-time", verifyToken, async (req, res) => {
   const { userId } = req;
 
   console.log(req.body);
+
   const { pomodoroTime, breaktime } = req.body;
+
   if (!pomodoroTime || !breaktime)
     return res.status(401).json({ success: false, message: "Missing field" });
 
