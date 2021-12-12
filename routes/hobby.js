@@ -3,32 +3,38 @@ const router = express.Router();
 const verifyToken = require("../middlewares/auth.middleware");
 const Hobby = require("../models/Hobby");
 
-//CREATE HOBBY LIST
+//CREATE HOBBY
+
 router.post("/create", verifyToken, async (req, res) => {
   const { userId } = req;
-  const { name, desc, timeLimit } = req.body;
-  if (!userId || !name || !desc || !timeLimit)
-    return res
-      .status(401)
-      .json({ success: false, message: "Missing fields !" });
+  const { name, time, level, often, calories, image, desc } = req.body;
+
+  if (!name || !time || !level || !often || !calories || !image || !desc)
+    return res.status(401).json({ success: false, message: "Missing fields!" });
 
   try {
-    const newHobby = await new Hobby({ name, desc, timeLimit, userId });
-    if (!newHobby)
-      return res.status(404).json({
-        sucess: false,
-        message: "Something happened to backend, please try again",
-      });
+    const newHobby = new Hobby({
+      userId,
+      name,
+      time,
+      level,
+      often,
+      calories,
+      image,
+      desc,
+    });
+
     await newHobby.save();
     return res
       .status(200)
-      .json({ success: true, message: "Add hobby successfully" });
+      .json({ success: true, message: "Add new hobby success" });
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Internal server error: " + err });
+      .json({ success: false, message: "Internal server err: " + err });
   }
 });
+
 //GET HOBBY
 router.get("/", verifyToken, async (req, res) => {
   const { userId } = req;

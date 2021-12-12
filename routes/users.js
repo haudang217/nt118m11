@@ -45,6 +45,7 @@ router.get("/info", verifyToken, async (req, res) => {
         _id: 1,
         pomodoroTime: 1,
         breaktime: 1,
+        avt: 1,
       }
     );
 
@@ -68,6 +69,7 @@ router.put("/edit", verifyToken, async (req, res) => {
   const { userId } = req;
 
   const { fullname, password, email, avt } = req.body;
+  console.log(req.body);
   if (!fullname || !password || !email || !userId || !avt)
     return res.status(401).json({ success: false, message: "Missing field" });
 

@@ -5,7 +5,9 @@ Content-Type: application/json
 {
     "username": "duytung03",
     "password": "1611",
-    "fullname": "Nguyen Duy Tung"
+    "fullname": "Nguyen Duy Tung",
+    "email": "nduytung",
+    "sex":"male"
 }
 
 ###
@@ -185,3 +187,23 @@ Content-Type: application/json
 {
     "taskId" : "61b1ac5b27ab4188982a7cd9"
 }
+
+###
+POST http://localhost:3001/hobby/create 
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+Content-Type: application/json
+
+{
+    "name":"TEST", 
+    "time":20,
+    "level": 9,
+    "often":2,
+    "calories":200,
+    "image":"HEHE BOI",
+    "desc": "HEHE"
+}
+
+###
+GET http://localhost:3001/hobby 
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
+Content-Type: application/json
