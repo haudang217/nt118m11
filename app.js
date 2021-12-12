@@ -31,4 +31,6 @@ app.use("/hobby", hobbyRouter);
 //API get all users
 app.use("/user", userRouter);
 
+app.listen("3001", () => console.log("connected!"));
+
 module.exports = app;
