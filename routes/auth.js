@@ -100,4 +100,10 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  return res
+    .status(200)
+    .json({ message: "Hello from Team #25' deployed API", success: true });
+});
+
 module.exports = router;
