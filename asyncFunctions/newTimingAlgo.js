@@ -1,6 +1,6 @@
 const moment = require("moment");
 
-const newTimingAlgo = (maxTask = 1, taskArr) => {
+const newTimingAlgo = (maxTask, taskArr) => {
   let sortedTask = taskArr.slice(0);
 
   sortedTask.sort((a, b) => {
@@ -51,7 +51,8 @@ const newTimingAlgo = (maxTask = 1, taskArr) => {
 
   sortedTask.map((task) => console.log(task));
 
-  return sortedTask;
+  if (flag === true) return sortedTask;
+  return flag;
 };
 
 module.exports = newTimingAlgo;

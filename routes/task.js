@@ -25,10 +25,11 @@ router.get("/", verifyToken, async (req, res) => {
 
     let a = false;
     let counter = 1;
-    while (a == false) {
+    while (a === false) {
       counter += 1;
       a = newTimingAlgo(counter, tasks);
     }
+    console.log("counter: " + counter);
 
     return res
       .status(200)
@@ -157,13 +158,11 @@ router.put("/update/pomodoro", async (req, res) => {
         { done: newPmdr }
       );
       if (task)
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "update pomodoro successfully",
-            task,
-          });
+        return res.status(200).json({
+          success: true,
+          message: "update pomodoro successfully",
+          task,
+        });
     }
     return res
       .status(403)

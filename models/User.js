@@ -37,6 +37,7 @@ const UserSchema = new Schema({
   },
   avt: {
     type: String,
+    default: "",
   },
 });
 
