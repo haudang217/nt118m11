@@ -3,6 +3,16 @@ const moment = require("moment");
 const newTimingAlgo = (maxTask, taskArr) => {
   let sortedTask = taskArr.slice(0);
 
+  const instanceToday = moment(new Date()).format("YYYY-MM-DD");
+  console.log("today is: " + instanceToday);
+
+  sortedTask.filter((a, b) => {
+    return (
+      parseInt(a.deadline.split("T")[0].replace(/-/g, "")) >
+      parseInt(instanceToday.replace(/-/g, ""))
+    );
+  });
+
   sortedTask.sort((a, b) => {
     return b.importantRate - a.importantRate;
   });

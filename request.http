@@ -3,9 +3,9 @@ POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "username": "duytung03",
+    "username": "QuachTuanAnh",
     "password": "1611",
-    "fullname": "Nguyen Duy Tung",
+    "fullname": "nhom 25",
     "email": "nduytung",
     "sex":"male"
 }
@@ -15,7 +15,7 @@ POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "username": "tung02",
+    "username": "QuachTuanAnh",
     "password" : "1611"
 }
 
@@ -46,13 +46,15 @@ Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE
 ###
 POST http://localhost:3001/task/add
 Content-Type: application/json
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWI2ODQ3NTZiY2Y5MzYzNWI2NmM4OTgiLCJpYXQiOjE2MzkzNTUxODF9.HX8PEhGgOr_CMCX0T1fDBihO6kf2hbLsoQtDSBNdZVU"
 
 {
-    "userId": "61a6f19070d0ae5721423184",
+    "userId": "61b694abcaada9fcaad73e82",
     "taskname": "Task 04",
     "totalTime" : 200,  
     "deadline" : "Wed, 21 Oct 2015 18:27:50 GMT",
-    "importantRate": 6
+    "importantRate": 6,
+    "description": "ok"
 
 }
 
@@ -99,16 +101,17 @@ Content-Type: application/json
 Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 
 {
-    "taskId": "61ab1abe319c8490c80725f8"
+    "taskId": "61b5f00f6aefd0be28fbc562"
 }
 
 ###
 
 PUT http://localhost:3001/task/update/pomodoro
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 Content-Type: application/json
 
 {
-    "taskId": "61b176270ce3607ecba7d154"
+    "taskId": "61b68c5f6cecf0458f005e92"
 }
 
 
@@ -181,10 +184,11 @@ Content-Type: application/json
 
 ###
 PUT http://localhost:3001/task/update/pomodoro
+Authorization: "Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE2ZjE5MDcwZDBhZTU3MjE0MjMxODQiLCJpYXQiOjE2Mzg2MjE5ODJ9.iLb4DWrUw_1a4FfH6yPWpxwNikMYgjF3HJKolwDshgA"
 Content-Type: application/json
 
 {
-    "taskId" : "61b1ac5b27ab4188982a7cd9"
+    "taskId" : "61b689148a93c8d88b30a800"
 }
 
 ###

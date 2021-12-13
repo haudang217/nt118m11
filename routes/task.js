@@ -2,9 +2,11 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const argon2 = require("argon2");
 const Task = require("../models/Task");
+const User = require("../models/User");
 const verifyToken = require("../middlewares/auth.middleware");
 const router = express.Router();
 const newTimingAlgo = require("../asyncFunctions/newTimingAlgo");
+const moment = require("moment");
 
 require("dotenv").config();
 
@@ -23,17 +25,36 @@ router.get("/", verifyToken, async (req, res) => {
     if (!tasks)
       return res.status(404).json({ success: false, message: "No task found" });
 
+    const instanceToday = moment(new Date()).format("YYYY-MM-DD");
+    console.log("today is: " + instanceToday);
+
+    let sortedTask = tasks.filter((a, b) => {
+      return (
+        parseInt(a.deadline.split("T")[0].replace(/-/g, "")) >
+        parseInt(instanceToday.replace(/-/g, ""))
+      );
+    });
+
+    let doneTask = tasks.filter((a, b) => {
+      return (
+        parseInt(a.deadline.split("T")[0].replace(/-/g, "")) <
+        parseInt(instanceToday.replace(/-/g, ""))
+      );
+    });
+
     let a = false;
     let counter = 1;
     while (a === false) {
       counter += 1;
-      a = newTimingAlgo(counter, tasks);
+      a = newTimingAlgo(counter, sortedTask);
     }
     console.log("counter: " + counter);
 
-    return res
-      .status(200)
-      .json({ success: true, message: "Get tasks successfully", tasks: a });
+    return res.status(200).json({
+      success: true,
+      message: "Get tasks successfully",
+      tasks: a.concat(doneTask),
+    });
   } catch (err) {
     return res
       .status(500)
@@ -139,7 +160,7 @@ router.put("/edit", async (req, res) => {
 });
 
 //UPDATE POMODORO DONE
-router.put("/update/pomodoro", async (req, res) => {
+router.put("/update/pomodoro", verifyToken, async (req, res) => {
   const { taskId } = req.body;
 
   if (!taskId)
@@ -148,10 +169,23 @@ router.put("/update/pomodoro", async (req, res) => {
   try {
     let donePomodoro = await Task.findOne(
       { _id: taskId },
-      { done: 1, pomodoroPeriod: 1 }
+      { done: 1, pomodoroPeriod: 1, userId: 1 }
     );
 
+    let userPomodoro = await User.findOne(
+      { _id: donePomodoro.userId },
+      { pomodoroDone: 1 }
+    );
+
+    await console.log("user get: " + donePomodoro);
     let newPmdr = (await donePomodoro.done) + 1;
+    let newUserPmdr = (await userPomodoro.pomodoroDone) + 1;
+
+    const newData = await User.findOneAndUpdate(
+      { _id: donePomodoro.userId },
+      { pomodoroDone: newUserPmdr }
+    );
+
     if (newPmdr <= (await donePomodoro.pomodoroPeriod)) {
       const task = await Task.findOneAndUpdate(
         { _id: taskId },
