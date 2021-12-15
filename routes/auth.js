@@ -32,7 +32,7 @@ router.post("/login", async (req, res) => {
     //neu kiem ra
     const accessToken = jwt.sign(
       { userId: user._id },
-      process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET,
     );
 
     //gui ve cho user
