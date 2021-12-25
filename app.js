@@ -35,7 +35,11 @@ app.use("/hobby", hobbyRouter);
 //API get all users
 app.use("/user", userRouter);
 
-app.get("/", (req, res) => res.send("Hello world"));
+app.get("/", (req, res) =>
+  res.send(
+    "<div><h1> Hello, This Backend has been overwritten by team #25</h1> <h2> Some routes that do not require access token to view: </h2> <ul><li> /user/all: get all users info </li> <li> /: home route </li> </ul><p>Other routes require access token. Please login or use our mobile app to check it out.</p> </div>"
+  )
+);
 
 app.listen("3001", () => console.log("connected!"));
 
