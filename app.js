@@ -41,6 +41,6 @@ app.get("/", (req, res) =>
   )
 );
 
-app.listen("3001", () => console.log("connected!"));
+app.listen(process.env.PORT || "3001", () => console.log("connected!"));
 
 module.exports = app;
