@@ -16,6 +16,7 @@ const newTimingAlgo = (maxTask, taskArr) => {
   sortedTask.sort((a, b) => {
     return b.importantRate - a.importantRate;
   });
+  
   sortedTask.sort((a, b) => {
     return (
       parseInt(a.deadline.split("T")[0].replace(/-/g, "")) -
