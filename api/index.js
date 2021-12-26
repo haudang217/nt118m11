@@ -52,6 +52,6 @@ index.get("/", (req, res) =>
   )
 );
 
-index.listen("3001", () => console.log("connected!"));
+index.listen(process.env.PORT || "3001", () => console.log("connected!"));
 
 module.exports = index;
